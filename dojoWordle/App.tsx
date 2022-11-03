@@ -3,7 +3,7 @@ import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
-import { Game } from "./components/Game";
+import { Game } from "./components/Game/Game";
 
 export default function App() {
   return (
