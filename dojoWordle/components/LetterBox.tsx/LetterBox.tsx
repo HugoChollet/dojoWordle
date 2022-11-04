@@ -2,10 +2,10 @@ import React from "react";
 import { Text } from "react-native";
 import { Box } from "./LetterBox.style";
 
-export type letterStatus = "success" | "failure" | "missed";
+export type LetterStatus = "success" | "failure" | "missed";
 
 export type LetterBoxProps = {
-  status: letterStatus;
+  status: LetterStatus;
   letter?: string;
 };
 
