@@ -2,7 +2,7 @@ import React from "react";
 import { Text } from "react-native";
 import { Box } from "./LetterBox.style";
 
-export type LetterStatus = "success" | "failure" | "missed";
+export type LetterStatus = "success" | "failure" | "missed" | "pending";
 
 export type LetterBoxProps = {
   status: LetterStatus;

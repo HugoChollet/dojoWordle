@@ -11,6 +11,7 @@ export const Box = styled.View<{ status: LetterBoxProps["status"] }>(
     alignItems: "center",
     borderColor: "grey",
     borderWidth: 3,
+    justifyContent: "center",
   })
 );
 
@@ -22,5 +23,7 @@ const getStatusColor = (status: LetterBoxProps["status"]) => {
       return "red";
     case "missed":
       return "yellow";
+    case "pending":
+      return "grey";
   }
 };
