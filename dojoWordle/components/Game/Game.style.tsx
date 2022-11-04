@@ -1,5 +1,5 @@
 import styled from "@emotion/native";
-import { LetterBox, letterStatus } from "../LetterBox.tsx/LetterBox";
+import { LetterBox, LetterStatus } from "../LetterBox.tsx/LetterBox";
 import { wordToFind } from "./Game";
 
 export const SpacerVertical = styled.View({
@@ -21,7 +21,7 @@ export const displayCheckedWord = (wordGuessed: string) => {
   let i = 0;
 
   wordWithStatus = wordToFind.map((letter) => {
-    var status: letterStatus;
+    var status: LetterStatus;
     status = "failure";
 
     if (letter === wordGuessed[i]) {
