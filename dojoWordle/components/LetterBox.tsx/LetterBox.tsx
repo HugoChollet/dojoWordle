@@ -12,7 +12,7 @@ export type LetterBoxProps = {
 export function LetterBox({ status, letter = "." }: LetterBoxProps) {
   return (
     <Box status={status}>
-      <Text> {letter} </Text>
+      <Text>{letter}</Text>
     </Box>
   );
 }

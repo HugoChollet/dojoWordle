@@ -2,7 +2,7 @@ import React from "react";
 import { View } from "react-native";
 import { Keyboard } from "../Keyboard/Keyboard";
 import { LetterBox } from "../LetterBox.tsx/LetterBox";
-import { ResultContainer } from "./Game.style";
+import { ResultContainer, SpacerVertical } from "./Game.style";
 
 export function Game() {
   return (
@@ -12,6 +12,7 @@ export function Game() {
         <LetterBox status="failure" />
         <LetterBox status="missed" />
       </ResultContainer>
+      <SpacerVertical />
       <Keyboard />
     </View>
   );
