@@ -7,37 +7,46 @@ import {
   displayCheckedWord,
   displayTypingWord,
   SpacerVertical,
-  wordToFind,
+  CheckedWord,
 } from "./Game.style";
 
+export const wordToFind = ["b", "o", "n", "j", "o", "u", "r"];
+
 export function Game() {
-  const [wordInput, setWordInput] = useState("");
-  const [wordValid, setWordValid] = useState("");
+  const [suggestedWord, setSuggestedWord] = useState("");
+  const [wordsChecked, setWordsChecked] = useState<string[]>();
 
-  const keyPress = (key: string) => {
-    if (wordInput.length === wordToFind.length) return;
-    setWordInput((oldWord) => oldWord + key);
+  const onKeyPress = (key: string) => {
+    suggestedWord.length === wordToFind.length
+      ? null
+      : setSuggestedWord((oldWord) => oldWord + key);
   };
 
-  const deleteKey = () => {
-    setWordInput((oldWord) => oldWord.slice(0, -1));
+  const onDeleteKey = () => {
+    setSuggestedWord((oldWord) => oldWord.slice(0, -1));
   };
 
-  const enterKey = () => {
-    if (wordInput.length !== wordToFind.length) return;
-    setWordValid(wordInput);
-    setWordInput("");
+  const onEnterKey = () => {
+    if (suggestedWord.length !== wordToFind.length) return;
+    if (!wordsChecked) {
+      setWordsChecked([suggestedWord]);
+      setSuggestedWord("");
+      return;
+    }
+    setWordsChecked((words) => words.concat(suggestedWord));
+    console.log(wordsChecked);
+
+    setSuggestedWord("");
   };
 
   return (
     <View>
-      <ResultContainer>{displayCheckedWord(wordValid)}</ResultContainer>
-      <ResultContainer>{displayTypingWord(wordInput)}</ResultContainer>
-      <SpacerVertical />
+      {Boolean(wordsChecked) && <CheckedWord wordsChecked={wordsChecked} />}
+      <ResultContainer>{displayTypingWord(suggestedWord)}</ResultContainer>
       <Keyboard
-        onKeyPress={keyPress}
-        onDelPress={deleteKey}
-        onEnterPress={enterKey}
+        onKeyPress={onKeyPress}
+        onDelPress={onDeleteKey}
+        onEnterPress={onEnterKey}
       />
     </View>
   );

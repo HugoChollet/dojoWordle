@@ -1,7 +1,6 @@
 import styled from "@emotion/native";
 import { LetterBox, letterStatus } from "../LetterBox.tsx/LetterBox";
-
-export const wordToFind = ["b", "o", "n", "j", "o", "u", "r"];
+import { wordToFind } from "./Game";
 
 export const SpacerVertical = styled.View({
   height: 50,
@@ -18,31 +17,49 @@ export const ResultContainer = styled.View({
 });
 
 export const displayCheckedWord = (wordGuessed: string) => {
-  var wordWithStatus = [];
-  var i: number;
+  let wordWithStatus = [];
+  let i = 0;
 
-  {
-    for (i = 0; i < wordToFind.length; i++) {
-      var status: letterStatus;
-      status = "failure";
+  wordWithStatus = wordToFind.map((letter) => {
+    var status: letterStatus;
+    status = "failure";
 
-      if (wordToFind[i] === wordGuessed[i]) {
-        status = "success";
-      } else if (wordToFind.find((character) => character === wordGuessed[i])) {
-        status = "missed";
-      }
-      wordWithStatus[i] = <LetterBox status={status} letter={wordGuessed[i]} />;
+    if (letter === wordGuessed[i]) {
+      status = "success";
+    } else if (wordToFind.find((character) => character === wordGuessed[i])) {
+      status = "missed";
     }
-  }
+    return (
+      <LetterBox
+        status={status}
+        letter={wordGuessed[i++]}
+        key={"checking" + i}
+      />
+    );
+  });
+
   return wordWithStatus;
 };
 
 export const displayTypingWord = (wordTyped: string) => {
-  var wordBox = [];
-  var i: number;
+  let wordBox = [];
+  let i = 0;
 
-  for (i = 0; i < wordToFind.length; i++) {
-    wordBox[i] = <LetterBox status={"pending"} letter={wordTyped[i]} />;
-  }
+  wordBox = wordToFind.map(() => {
+    i++;
+    return (
+      <LetterBox
+        status={"pending"}
+        letter={wordTyped[i - 1]}
+        key={"typing" + i}
+      />
+    );
+  });
   return wordBox;
+};
+
+export const CheckedWord = ({ wordsChecked }: string[]) => {
+  return (
+    <ResultContainer>{displayCheckedWord(wordsChecked[0])}</ResultContainer>
+  );
 };
